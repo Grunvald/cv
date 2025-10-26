@@ -1,0 +1,276 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+  line-height: 1.65;
+  color: #323a4d;
+  background: #eef2f7;
+}
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 24px;
+}
+
+.resume {
+  width: 900px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 32px 80px rgba(16, 27, 50, 0.12);
+  overflow: hidden;
+}
+
+.resume__header {
+  display: flex;
+  gap: 36px;
+  padding: 44px 52px;
+  background: linear-gradient(135deg, #e0e6ef 0%, #f0f4fa 100%);
+  border-bottom: 1px solid #d9e0ec;
+}
+
+.resume__photo {
+  width: 220px;
+  min-height: 260px;
+  background: #cfd6e2;
+  border-radius: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resume__photo img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.resume__headline {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.resume__name {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: 4.5px;
+  color: #1a2538;
+}
+
+.resume__title {
+  margin: 8px 0 32px;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #4c576d;
+}
+
+.resume__contacts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 32px;
+}
+
+.resume__contact {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-weight: 500;
+  color: #1f2a3d;
+}
+
+.resume__contact-text {
+  font-size: 15px;
+  letter-spacing: 0.3px;
+}
+
+.resume__icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #111827;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.16);
+  color: #ffffff;
+}
+
+.resume__icon svg {
+  width: 19px;
+}
+
+.resume__section {
+  padding: 44px 52px 0;
+}
+
+.resume__section:last-of-type {
+  padding-bottom: 52px;
+}
+
+.resume__section + .resume__section {
+  padding-top: 36px;
+}
+
+.resume__section--languages {
+  border-top: 1px solid #e2e6ef;
+  padding-top: 36px;
+  margin-top: 44px;
+}
+
+.resume__section-title {
+  margin: 0 0 18px;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 2.6px;
+  color: #1c2535;
+}
+
+.resume__text {
+  margin: 0;
+  font-size: 15px;
+  color: #3a4357;
+}
+
+.resume__text + .resume__text {
+  margin-top: 18px;
+}
+
+.experience {
+  border-top: 1px solid #e2e6ef;
+  padding-top: 28px;
+}
+
+.experience + .experience {
+  margin-top: 40px;
+}
+
+.experience__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 36px;
+  margin-bottom: 22px;
+}
+
+.experience__company {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  color: #1d2737;
+  text-transform: uppercase;
+}
+
+.experience__period {
+  margin: 6px 0 0;
+  font-size: 15px;
+  color: #60708a;
+}
+
+.experience__role {
+  margin: 4px 0 0;
+  font-weight: 600;
+  color: #1d2737;
+}
+
+.experience__subheading {
+  margin: 28px 0 8px;
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #2d384c;
+}
+
+.experience__project {
+  font-weight: 600;
+  color: #1f2a3d;
+}
+
+.experience__description {
+  margin-top: 16px;
+}
+
+.experience__list {
+  margin: 16px 0 0;
+  padding-left: 22px;
+  font-size: 15px;
+  color: #3a4357;
+}
+
+.experience__list li {
+  margin-bottom: 10px;
+}
+
+.experience__list li::marker {
+  color: #97a2b8;
+}
+
+.languages {
+  list-style: none;
+  margin: 16px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 32px;
+  font-weight: 600;
+  color: #1f2a3d;
+}
+
+.languages li {
+  display: flex;
+  justify-content: space-between;
+  letter-spacing: 0.4px;
+}
+
+@media (max-width: 860px) {
+  .resume__header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .resume__headline {
+    align-items: center;
+  }
+
+  .resume__contacts {
+    justify-content: center;
+  }
+
+  .resume__header,
+  .resume__section {
+    padding: 36px 28px;
+  }
+
+  .resume__photo {
+    width: 200px;
+  }
+
+  .experience__header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .languages {
+    grid-template-columns: 1fr;
+  }
+}
