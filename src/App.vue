@@ -38,13 +38,50 @@ import LanguagesList from "./components/LanguagesList.vue";
 import { resume } from "./data/resume_spanish";
 </script>
 
-<style>
+<style scoped>
+.page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 24px;
+}
+
+.resume {
+  width: 900px;
+  max-width: 100%;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 32px 80px rgba(16, 27, 50, 0.12);
+  overflow: hidden;
+}
+
+.resume__text {
+  margin: 0;
+  font-size: 15px;
+  color: #3a4357;
+}
+
+.resume__text + .resume__text {
+  margin-top: 18px;
+}
+
 @media print {
   .page {
     margin: 0;
     padding: 0;
     display: block;
     width: 100%;
+    min-height: auto;
+    align-items: stretch;
+  }
+
+  .resume {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    border-radius: 0;
+    box-shadow: none;
   }
 }
 </style>

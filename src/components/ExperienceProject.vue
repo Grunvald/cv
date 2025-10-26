@@ -26,3 +26,20 @@ defineProps({
   },
 });
 </script>
+
+<style scoped>
+.experience__project {
+  font-weight: 600;
+  color: #1f2a3d;
+}
+
+.resume__text {
+  margin: 0;
+  font-size: 15px;
+  color: #3a4357;
+}
+
+.experience__description {
+  margin-top: 16px;
+}
+</style>
