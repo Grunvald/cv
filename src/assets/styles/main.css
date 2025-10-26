@@ -274,3 +274,64 @@ body {
     grid-template-columns: 1fr;
   }
 }
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+
+  .page {
+    min-height: auto;
+    padding: 0;
+    display: block;
+    align-items: stretch;
+  }
+
+  .resume {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .resume__header,
+  .resume__section {
+    padding-left: 18mm;
+    padding-right: 18mm;
+  }
+
+  .resume__header {
+    padding-top: 18mm;
+    padding-bottom: 14mm;
+  }
+
+  .resume__section {
+    padding-top: 12mm;
+  }
+
+  .resume__section:last-of-type {
+    padding-bottom: 18mm;
+  }
+
+  .resume__section + .resume__section {
+    padding-top: 10mm;
+  }
+
+  .resume__section,
+  .experience,
+  .experience__list,
+  .languages li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  .resume__section-title {
+    page-break-after: avoid;
+  }
+}
