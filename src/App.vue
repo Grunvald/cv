@@ -41,11 +41,9 @@ import { resume } from "./data/resume_spanish";
 <style>
 @media print {
   .page {
-     margin: 0;
-  }
-  .page {
-    box-shadow: none;
-    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
     width: 100%;
   }
 }
