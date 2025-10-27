@@ -43,18 +43,8 @@ const iconComponent = computed(() => icons[props.contact.type] || "span");
 }
 
 .resume__icon {
+  display: block;
   width: 42px;
   height: 42px;
-  border-radius: 12px;
-  background: #111827;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 10px 20px rgba(17, 24, 39, 0.16);
-  color: #ffffff;
-}
-
-.resume__icon svg {
-  width: 19px;
 }
 </style>
