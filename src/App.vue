@@ -1,6 +1,17 @@
 <template>
   <main class="page">
-    <section class="resume">
+    <div class="page__toolbar">
+      <button
+        class="download-button"
+        type="button"
+        :disabled="isGenerating"
+        @click="downloadPdf"
+      >
+        <span v-if="!isGenerating">Download PDF</span>
+        <span v-else>Preparing...</span>
+      </button>
+    </div>
+    <section class="resume" ref="resumeRef">
       <ResumeHeader :header="resume.header" />
 
       <UiSection title="SUMMARY">
@@ -31,11 +42,59 @@
 </template>
 
 <script setup>
+import { ref } from "vue";
+import html2canvas from "html2canvas";
+import jsPDF from "jspdf";
 import ResumeHeader from "./components/ResumeHeader.vue";
 import UiSection from "./components/ui/UiSection.vue";
 import ExperienceBlock from "./components/ExperienceBlock.vue";
 import LanguagesList from "./components/LanguagesList.vue";
 import { resume } from "./data/resume_spanish";
+
+const resumeRef = ref(null);
+const isGenerating = ref(false);
+
+const downloadPdf = async () => {
+  if (!resumeRef.value || isGenerating.value) return;
+
+  isGenerating.value = true;
+
+  try {
+    const scale = Math.min(2, window.devicePixelRatio || 1.5);
+    const canvas = await html2canvas(resumeRef.value, {
+      scale,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+    });
+
+    const imgData = canvas.toDataURL("image/png");
+    const pdf = new jsPDF("p", "mm", "a4");
+    const pageWidth = pdf.internal.pageSize.getWidth();
+    const pageHeight = pdf.internal.pageSize.getHeight();
+    const imgProps = pdf.getImageProperties(imgData);
+    const pdfWidth = pageWidth;
+    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+    let heightLeft = pdfHeight;
+    let position = 0;
+
+    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+    heightLeft -= pageHeight;
+
+    while (heightLeft > 0) {
+      position = heightLeft - pdfHeight;
+      pdf.addPage();
+      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+      heightLeft -= pageHeight;
+    }
+
+    pdf.save("Vasili-Sholukh-Resume.pdf");
+  } catch (error) {
+    console.error("Failed to generate PDF", error);
+  } finally {
+    isGenerating.value = false;
+  }
+};
 </script>
 
 <style scoped>
@@ -85,3 +144,4 @@ import { resume } from "./data/resume_spanish";
   }
 }
 </style>
+
