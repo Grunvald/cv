@@ -20,7 +20,11 @@
         <span v-else>Preparing...</span>
       </button>
     </div>
-    <section class="resume" ref="resumeRef">
+    <section
+      class="resume"
+      :class="{ 'resume--exporting': isGenerating }"
+      ref="resumeRef"
+    >
       <ResumeHeader :header="resume.header" />
 
       <UiSection title="SUMMARY">
@@ -51,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ResumeHeader from "./components/ResumeHeader.vue";
@@ -85,31 +89,38 @@ const downloadPdf = async () => {
   isGenerating.value = true;
 
   try {
-    const scale = Math.min(2, window.devicePixelRatio || 1.5);
-    const canvas = await html2canvas(resumeRef.value, {
+    await nextTick();
+
+    const element = resumeRef.value;
+    const rect = element.getBoundingClientRect();
+    const scale = Math.min(2, window.devicePixelRatio || 2);
+    const canvas = await html2canvas(element, {
       scale,
-      useCORS: true,
+      width: rect.width,
+      height: rect.height,
       backgroundColor: "#ffffff",
+      scrollX: 0,
+      scrollY: -window.scrollY,
+      useCORS: true,
     });
 
     const imgData = canvas.toDataURL("image/png");
     const pdf = new jsPDF("p", "mm", "a4");
     const pageWidth = pdf.internal.pageSize.getWidth();
     const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgProps = pdf.getImageProperties(imgData);
-    const pdfWidth = pageWidth;
-    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+    const imgWidth = pageWidth;
+    const imgHeight = (canvas.height * imgWidth) / canvas.width;
 
-    let heightLeft = pdfHeight;
+    let heightLeft = imgHeight;
     let position = 0;
 
-    pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
     heightLeft -= pageHeight;
 
     while (heightLeft > 0) {
-      position = heightLeft - pdfHeight;
+      position -= pageHeight;
       pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, pdfWidth, pdfHeight);
+      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
       heightLeft -= pageHeight;
     }
 
@@ -145,6 +156,21 @@ const downloadPdf = async () => {
   border-radius: 20px;
   box-shadow: 0 32px 80px rgba(16, 27, 50, 0.12);
   overflow: hidden;
+}
+
+.resume--exporting {
+  width: 210mm;
+  max-width: none;
+  border-radius: 0;
+  box-shadow: none;
+  background: #ffffff;
+}
+
+.resume--exporting :deep(.resume__section),
+.resume--exporting :deep(.experience),
+.resume--exporting :deep(.project) {
+  break-inside: avoid-page;
+  page-break-inside: avoid;
 }
 
 .resume__text {
