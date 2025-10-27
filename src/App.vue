@@ -56,8 +56,7 @@
 
 <script setup>
 import { ref, computed, nextTick } from "vue";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+import { loadJsPdf } from "./utils/loadJsPdf";
 import ResumeHeader from "./components/ResumeHeader.vue";
 import UiSection from "./components/ui/UiSection.vue";
 import ExperienceBlock from "./components/ExperienceBlock.vue";
@@ -92,37 +91,24 @@ const downloadPdf = async () => {
     await nextTick();
 
     const element = resumeRef.value;
-    const rect = element.getBoundingClientRect();
-    const scale = Math.min(2, window.devicePixelRatio || 2);
-    const canvas = await html2canvas(element, {
-      scale,
-      width: rect.width,
-      height: rect.height,
-      backgroundColor: "#ffffff",
-      scrollX: 0,
-      scrollY: -window.scrollY,
-      useCORS: true,
+    const JsPDFConstructor = await loadJsPdf();
+    const pdf = new JsPDFConstructor({
+      orientation: "portrait",
+      unit: "mm",
+      format: "a4",
     });
 
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft > 0) {
-      position -= pageHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+    await pdf.html(element, {
+      margin: [12, 14, 16, 14],
+      autoPaging: "text",
+      html2canvas: {
+        scale: Math.min(2, window.devicePixelRatio || 2),
+        useCORS: true,
+        backgroundColor: "#ffffff",
+        scrollX: 0,
+        scrollY: -window.scrollY,
+      },
+    });
 
     pdf.save(`vasili-sholukh-resume-${lang.value}.pdf`);
   } catch (error) {
@@ -166,9 +152,9 @@ const downloadPdf = async () => {
   background: #ffffff;
 }
 
-.resume--exporting :deep(.resume__section),
-.resume--exporting :deep(.experience),
-.resume--exporting :deep(.project) {
+.resume :deep(.resume__section),
+.resume :deep(.experience),
+.resume :deep(.project) {
   break-inside: avoid-page;
   page-break-inside: avoid;
 }

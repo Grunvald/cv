@@ -35,6 +35,8 @@ defineProps({
   padding: 44px 52px;
   background: linear-gradient(135deg, #e0e6ef 0%, #f0f4fa 100%);
   border-bottom: 1px solid #d9e0ec;
+  break-inside: avoid-page;
+  page-break-inside: avoid;
 }
 
 .resume__photo {
