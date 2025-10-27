@@ -91,38 +91,36 @@ const downloadPdf = async () => {
   try {
     await nextTick();
 
-    const element = resumeRef.value;
-    const rect = element.getBoundingClientRect();
-    const scale = Math.min(2, window.devicePixelRatio || 2);
-    const canvas = await html2canvas(element, {
-      scale,
-      width: rect.width,
-      height: rect.height,
-      backgroundColor: "#ffffff",
-      scrollX: 0,
-      scrollY: -window.scrollY,
-      useCORS: true,
+    const pdf = new jsPDF({
+      orientation: "portrait",
+      unit: "pt",
+      format: "a4",
     });
 
-    const imgData = canvas.toDataURL("image/png");
-    const pdf = new jsPDF("p", "mm", "a4");
-    const pageWidth = pdf.internal.pageSize.getWidth();
-    const pageHeight = pdf.internal.pageSize.getHeight();
-    const imgWidth = pageWidth;
-    const imgHeight = (canvas.height * imgWidth) / canvas.width;
+    await new Promise((resolve) => {
+      if (typeof window !== "undefined") {
+        window.html2canvas = html2canvas;
+      }
 
-    let heightLeft = imgHeight;
-    let position = 0;
-
-    pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-    heightLeft -= pageHeight;
-
-    while (heightLeft > 0) {
-      position -= pageHeight;
-      pdf.addPage();
-      pdf.addImage(imgData, "PNG", 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-    }
+      pdf.html(resumeRef.value, {
+        margin: [48, 36, 48, 36],
+        autoPaging: "text",
+        html2canvas: {
+          scale: 2,
+          useCORS: true,
+          scrollX: 0,
+          scrollY: 0,
+          backgroundColor: "#ffffff",
+        },
+        pagebreak: {
+          mode: ["css", "legacy"],
+          avoid: [".resume__section", ".experience", ".project"],
+        },
+        callback: (doc) => resolve(doc),
+        x: 0,
+        y: 0,
+      });
+    });
 
     pdf.save(`vasili-sholukh-resume-${lang.value}.pdf`);
   } catch (error) {
@@ -158,19 +156,19 @@ const downloadPdf = async () => {
   overflow: hidden;
 }
 
+.resume :deep(.resume__section),
+.resume :deep(.experience),
+.resume :deep(.project) {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 .resume--exporting {
   width: 210mm;
   max-width: none;
   border-radius: 0;
   box-shadow: none;
   background: #ffffff;
-}
-
-.resume--exporting :deep(.resume__section),
-.resume--exporting :deep(.experience),
-.resume--exporting :deep(.project) {
-  break-inside: avoid-page;
-  page-break-inside: avoid;
 }
 
 .resume__text {
