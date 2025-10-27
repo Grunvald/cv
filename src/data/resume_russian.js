@@ -1,6 +1,6 @@
 const photoUrl = new URL("../assets/images/profile.jpg", import.meta.url).href;
 
-export const resume = {
+export const resume_russian = {
   header: {
     name: "ВАСИЛИЙ ШОЛУХ",
     title: "Senior Frontend-разработчик",

@@ -2,6 +2,15 @@
   <main class="page">
     <div class="page__toolbar">
       <button
+        v-for="(lang, key) in resumeMap"
+        :key="key"
+        class="download-button"
+        type="button"
+       
+        v-text="key"
+        @click="changeLanguage(key)"
+      />
+      <button
         class="download-button"
         type="button"
         :disabled="isGenerating"
@@ -42,17 +51,33 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
 import ResumeHeader from "./components/ResumeHeader.vue";
 import UiSection from "./components/ui/UiSection.vue";
 import ExperienceBlock from "./components/ExperienceBlock.vue";
 import LanguagesList from "./components/LanguagesList.vue";
-import { resume } from "./data/resume_spanish";
+import { resume_spanish, resume_english, resume_russian } from "./data";
 
 const resumeRef = ref(null);
 const isGenerating = ref(false);
+
+const lang = ref('english');
+
+const resumeMap = {
+  english: resume_english,
+  russian: resume_russian,
+  spanish: resume_spanish,
+};
+
+const changeLanguage = (newLang) => {
+  if (resumeMap[newLang]) {
+    lang.value = newLang;
+  }
+};
+
+const resume = computed(() => resumeMap[lang.value]);
 
 const downloadPdf = async () => {
   if (!resumeRef.value || isGenerating.value) return;
@@ -88,7 +113,7 @@ const downloadPdf = async () => {
       heightLeft -= pageHeight;
     }
 
-    pdf.save("Vasili-Sholukh-Resume.pdf");
+    pdf.save(`vasili-sholukh-resume-${lang.value}.pdf`);
   } catch (error) {
     console.error("Failed to generate PDF", error);
   } finally {
@@ -101,9 +126,16 @@ const downloadPdf = async () => {
 .page {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 24px;
   padding: 48px 24px;
+}
+
+.page__toolbar {
+  display: flex;
+  gap: 12px;
 }
 
 .resume {
