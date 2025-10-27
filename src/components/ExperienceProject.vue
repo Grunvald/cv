@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="project">
     <div class="experience__project">{{ project.name }}</div>
     <p v-if="project.description" class="resume__text experience__description">
       {{ project.description }}
@@ -28,6 +28,11 @@ defineProps({
 </script>
 
 <style scoped>
+.project {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
 .experience__project {
   font-weight: 600;
   color: #1f2a3d;
