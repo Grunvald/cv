@@ -1,13 +1,13 @@
 <template>
   <div class="experience">
-    <div class="experience__header">
+    <div class="experience__header no-break">
       <div>
         <h3 class="experience__company">{{ experience.company }}</h3>
         <p class="experience__period">{{ experience.period }}</p>
       </div>
       <p class="experience__role">{{ experience.role }}</p>
     </div>
-    <p v-if="experience.description" class="resume__text">
+    <p v-if="experience.description" class="resume__text no-break">
       {{ experience.description }}
     </p>
     <ExperienceProject
@@ -83,13 +83,6 @@ defineProps({
     flex-direction: column;
     align-items: center;
     text-align: center;
-  }
-}
-
-@media print {
-  .experience {
-    break-inside: avoid;
-    page-break-inside: avoid;
   }
 }
 </style>

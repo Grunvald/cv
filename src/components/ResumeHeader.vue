@@ -1,8 +1,11 @@
 <template>
   <header class="resume__header">
-    <div class="resume__photo">
-      <img :src="header.photo" :alt="`Portrait of ${header.name}`" />
-    </div>
+    <div
+      class="resume__photo"
+      :style="{ backgroundImage: `url(${header.photo})` }"
+      :aria-label="`Portrait of ${header.name}`"
+      role="img"
+    />
     <div class="resume__headline">
       <h1 class="resume__name">{{ header.name }}</h1>
       <p class="resume__title">{{ header.title }}</p>
@@ -39,21 +42,13 @@ defineProps({
 
 .resume__photo {
   width: 220px;
-  min-height: 260px;
-  background: #cfd6e2;
+  height: 260px;
+  background-color: #cfd6e2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 16px;
-  overflow: hidden;
   flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.resume__photo img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .resume__headline {

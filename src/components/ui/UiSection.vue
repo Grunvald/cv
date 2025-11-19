@@ -62,8 +62,6 @@ const sectionClass = computed(() =>
     padding-left: 18mm;
     padding-right: 18mm;
     padding-top: 12mm;
-    break-inside: avoid;
-    page-break-inside: avoid;
   }
 
   .resume__section:last-of-type {

@@ -80,3 +80,21 @@ body {
     background: #ffffff;
   }
 }
+
+@media print {
+  .break-page {
+    break-before: page;
+  }
+}
+
+@media print {
+  .no-break {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+}
+
+@page {
+  margin-top: 15mm;
+  margin-bottom: 15mm;
+}

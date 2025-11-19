@@ -1,15 +1,19 @@
 <template>
   <div>
-    <div class="experience__project">{{ project.name }}</div>
-    <p v-if="project.description" class="resume__text experience__description">
-      {{ project.description }}
-    </p>
-    <div v-for="section in project.sections" :key="section.title">
+    <div class="no-break">
+      <div class="experience__project">{{ project.name }}</div>
+      <p v-if="project.description" class="resume__text experience__description">
+        {{ project.description }}
+      </p>
+    </div>
+    <div v-for="section in project.sections" :key="section.title" class="experience__section no-break">
       <UiSubheading>{{ section.title }}:</UiSubheading>
       <UiList>
-        <li v-for="(item, index) in section.items" :key="index">
-          {{ item }}
-        </li>
+        <li
+          v-for="(item, index) in section.items"
+          :key="index"
+          v-text="item"
+        />
       </UiList>
     </div>
   </div>

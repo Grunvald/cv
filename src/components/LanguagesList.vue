@@ -39,11 +39,4 @@ defineProps({
     grid-template-columns: 1fr;
   }
 }
-
-@media print {
-  .languages li {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-}
 </style>
