@@ -13,95 +13,137 @@ export const resume_english: Resume = {
     ],
   },
   summary:
-    "Senior Frontend Developer with over 9 years of experience in developing innovative web applications, including full-stack and DevOps expertise. Successfully contributed to diverse projects: from GPS tracking systems with over 9,000 active users to decentralized cryptocurrency exchanges and government information systems. Specializes in creating high-performance solutions using modern frontend and backend technologies. Experienced in performance optimization, UX design of complex systems, and cross-platform application development. Possesses leadership skills, successfully led development teams and optimized development processes. Capable of working effectively both in a team and independently leading large-scale projects.",
+    "Senior Frontend Developer with 11+ years of experience in complex web products: healthcare AI, GPS tracking, fintech, and government data-heavy systems. Currently working on BHG Copilot, a platform for physicians in the US Value-Based Care model: AI transcription of visits, clinical documentation generation, HEDIS/workflows for Medicare Advantage. I specialize in high-performance Vue/TypeScript applications, frontend monorepo architecture, LLM service integration, and reusable UI libraries. I act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, and deliver features to production.",
   skills:
     "JavaScript, TypeScript, HTML5, CSS3, SQL, Vue.js, React, jQuery, Node.js, Express.js, PostgreSQL, MongoDB, Solidity, Web3.js, Git, Webpack, Docker, CI/CD, Vuetify, Material-UI, Bootstrap, Jest, Grafana, WordPress, MODX, RESTful API, GraphQL, WebSocket, SVG, Responsive Design, Cross-browser Compatibility, Performance Optimization, SEO, Agile, Scrum, gulp, vuex, mobx, quasar, leaflet, elements-ui, vite",
   experiences: [
     {
-      company: "FTrack",
-      period: "December 2020 - Present (3 years 9 months)",
+      company: "SXOPE (Better Health Group)",
+      period: "October 2024 - Present (1 year 7 months)",
       role: "Senior Frontend Developer",
       description:
-        "Company Description: FTrack is a provider of GPS tracking and fleet management solutions, serving ~1000 business in Estonia, Latvia, Sweden and Finland. The company specializes in innovative software for real-time vehicle tracking, route optimization, and logistics management.",
+        "Company description: SXOPE is the technology core of Better Health Group, a US healthcare holding company. It develops a B2B Value-Based Care platform for clinics and partners: medical data aggregation, Care Gap detection, AI-assisted clinical decisions, and automation of physician documentation.",
       projects: [
         {
-          name: "Main web application for fleet management",
+          name: "BHG Copilot / platform ownership",
           sections: [
             {
               title: "Tasks and Technologies",
               items: [
-                "Goal: Develop and maintain a high-performance web application for GPS tracking and fleet management.",
-                "Technologies: Vue.js (Vue 2 & 3), Quasar, Node.js, Express.js, GraphQL, Docker, Jest, Leaflet, i18n.",
+                "Goal: Develop BHG Copilot, a platform for physicians in the Medicare Advantage model: clinical workflows, Care Gaps, HEDIS, integrations with EMR and internal medical-data services.",
+                "Technologies: Vue 3, TypeScript, Vite, pnpm/Turborepo monorepo, Vuex, vue-router, Pusher / Laravel Echo, Dexie, OIDC.",
               ],
             },
             {
               title: "Role and Responsibilities",
               items: [
-                "Full-cycle development of the client-side application, including architecture design, implementation, and optimization.",
-                "Leading the migration from Vue 2 to Vue 3.",
-                "Implementing unit testing and CI/CD processes.",
-                "Developing cross-platform solutions using Capacitor.",
+                "Act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, distribute tasks, and present results to stakeholders.",
+                "Own the HEDIS area end-to-end: from clarifying business requirements and finding data sources to production delivery.",
+                "Optimize performance and frontend monorepo architecture, including structural splitting into feature chunks and dependency management for internal packages.",
               ],
             },
             {
               title: "Results and Achievements",
               items: [
-                "Successfully migrated the application from Vue 2 to Vue 3, improving performance and reducing technical debt.",
+                "Reduced bundle size from 18 MB to 13 MB (-28%), improved First Contentful Paint from 4s to 2s (-50%), and Time to Interaction from 9s to 6s (-33%).",
+                "Initiated and completed the migration of 9 internal packages to peerDependencies, eliminating version conflicts, duplicate Vue instances, and extra weight in consuming applications.",
+                "Lead the HEDIS product area from business requirements to production with a team of up to 3 engineers.",
+              ],
+            },
+          ],
+        },
+        {
+          name: "AI clinical documentation",
+          description:
+            "Project: Copilot AI functionality for automating clinical documentation: Voice Note / AI Scribe and Progress Note Generator.",
+          sections: [
+            {
+              title: "Tasks and Technologies",
+              items: [
+                "Goal: Reduce physicians' documentation burden through real-time visit transcription, clinical suggestion generation, and Progress Note preparation.",
+                "Technologies: Vue 3, TypeScript, WebRTC / MediaRecorder, WebSocket, ONNX Runtime Web, Gemini API, ElevenLabs API, Chrome Extension messaging, LLM integration, pdfmake.",
+              ],
+            },
+            {
+              title: "Role and Responsibilities",
+              items: [
+                "Developed Voice Note / AI Scribe: audio stream processing from a Chrome extension, integration with AI/STT providers, and generation of clinical suggestions based on patient history.",
+                "Conducted technical discovery of the STT pipeline: ONNX Runtime Web on-device inference -> Gemini streaming -> production solution on ElevenLabs, considering real clinical environment constraints.",
+                "Developed Progress Note Generator: patient data aggregation, prompt composition, structured AI JSON retrieval, and text-based PDF generation via pdfmake.",
+              ],
+            },
+            {
+              title: "Results and Achievements",
+              items: [
+                "Delivered several AI features for clinical documentation to production and integrated them into the Copilot clinical workflow.",
+                "Implemented text-based PDF output for Progress Note: search and copy work natively, and the document can be edited, printed, emailed, and saved to the patient chart.",
+              ],
+            },
+          ],
+        },
+        {
+          name: "@sxope/text-editor - rich-text library for clinical notes",
+          description:
+            "Project: Internal Vue 3 / TipTap library for rich-text clinical notes, used by several SXOPE products.",
+          sections: [
+            {
+              title: "Tasks and Technologies",
+              items: [
+                "Goal: Provide a unified editor with AI integration, support for the company's historical JSON format, and extensibility for product teams.",
+                "Technologies: Vue 3, TypeScript, TipTap, ProseMirror, Markdown, Storybook.",
+              ],
+            },
+            {
+              title: "Role and Responsibilities",
+              items: [
+                "Independently developed the package: architecture, public API, documentation, releases, and backward compatibility support.",
+                "Implemented conversion between Markdown, TipTap JSON, and the company's historical JSON format, an extensible architecture for custom blocks, and AI editor tools.",
+                "Designed a WS-over-REST pattern for AI streams in a REST-oriented application; the solution was reused in several Copilot AI features.",
+              ],
+            },
+            {
+              title: "Results and Achievements",
+              items: [
+                "The package was adopted as the unified rich-text standard across several SXOPE products.",
+                "Established a stable public API, versioning, and deprecation policy for safe use of the library by product teams.",
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      company: "FTrack",
+      period: "December 2020 - September 2024 (3 years 10 months)",
+      role: "Senior Frontend Developer",
+      description:
+        "Company description: FTrack is a provider of GPS tracking and fleet-management solutions for ~1000 businesses in Estonia, Latvia, Sweden, and Finland.",
+      projects: [
+        {
+          name: "GPS tracking and fleet management",
+          sections: [
+            {
+              title: "Tasks and Technologies",
+              items: [
+                "Goal: Develop a web application for GPS tracking, fleet management, logistics, and client reporting.",
+                "Technologies: Vue 2/3, Quasar, TypeScript, Node.js, Express.js, GraphQL, Docker, Jest, Leaflet, Capacitor.",
+              ],
+            },
+            {
+              title: "Role and Responsibilities",
+              items: [
+                "Developed the main client application: map, real-time GPS tracking, fleet management, reporting, and cross-platform scenarios.",
+                "Led the frontend migration from Vue 2 to Vue 3, reducing technical debt and improving product maintainability.",
+                "Designed a PDF/XLS report generation microservice on Node.js + TypeScript and configured CI/CD processes.",
+              ],
+            },
+            {
+              title: "Results and Achievements",
+              items: [
                 "Optimized geospatial data processing, reducing the volume of transmitted information by 70%.",
-                "Implemented a cross-platform solution for web, Android, and iOS, expanding application accessibility.",
-                "Set up CI/CD on GitLab Actions, automating testing and deployment processes.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Report Generation Microservice",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Create a microservice for automated generation of PDF and XLS reports.",
-                "Technologies: Node.js, TypeScript, Express.js.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Designing and implementing a microservice architecture.",
-                "Developing automated report generation functionality.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
                 "Reduced report generation time by 30%.",
-                "Eliminated UI \"freezes\", significantly improving user experience.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Interactive Cargo Tracking Service",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Develop a real-time cargo tracking service for logistics operations.",
-                "Technologies: Vue.js, Leaflet, GraphQL.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Designing and implementing a real-time tracking interface.",
-                "Integrating with GPS tracking systems.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
-                "Created a user-friendly interface for real-time cargo tracking.",
-                "Increased transparency of logistics operations for clients.",
+                "Eliminated UI freezes during PDF/XLS document preparation.",
+                "Implemented a cross-platform solution for web, Android, and iOS via Capacitor.",
               ],
             },
           ],
@@ -113,124 +155,32 @@ export const resume_english: Resume = {
       period: "April 2019 - December 2020 (1 year 10 months)",
       role: "Senior Frontend Developer",
       description:
-        "Company Description: VironIT is an international software development company with offices in Belarus and the USA. The company delivers custom software solutions for various industries, including fintech, healthcare, and e-commerce, serving clients across Europe and North America.",
+        "Company description: VironIT is an international software development company with projects in fintech, healthcare, e-commerce, and enterprise.",
       projects: [
         {
-          name: "Decentralized Cryptocurrency Exchange",
+          name: "Client web products",
           sections: [
             {
               title: "Tasks and Technologies",
               items: [
-                "Goal: Creating a platform for cryptocurrency exchange through smart contracts and the ability to buy/sell cryptocurrency for real money.",
-                "Technologies: Vue.js, Node.js, Express.js, MongoDB, Web3.js, WebSocket, Solidity.",
+                "Goal: Develop client web products for fintech, enterprise analytics, and customer services.",
+                "Technologies: Vue.js, React, TypeScript, Node.js, Express.js, MongoDB, Web3.js, WebSocket, Solidity, Grafana, Vuetify.",
               ],
             },
             {
               title: "Role and Responsibilities",
               items: [
-                "Full project development from scratch, including architecture, frontend, and backend.",
-                "Writing smart contracts in Solidity for secure cryptocurrency exchange.",
-                "Setting up integration with Metamask wallet for user transactions.",
+                "Developed frontend and backend for a decentralized cryptocurrency exchange: user flows, WebSocket updates, smart contract integration, and Metamask integration.",
+                "Worked on a data-heavy application for analysts within the Unified Federal Register of the Population: complex UI, drag-and-drop, and visualization of large data volumes.",
+                "Led the frontend area on a client project for a utility company: team of 3 frontend developers, task distribution, code review, and delivery.",
               ],
             },
             {
               title: "Results and Achievements",
               items: [
-                "Successfully developed and launched an exchange supporting cryptocurrencies and fiat funds, ensuring transaction security through smart contracts.",
-                "Provided interaction with Metamask, allowing users to securely and conveniently work with cryptocurrencies.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "EPH (Unified Federal Register of the Population of Russia)",
-          description:
-            "Project: Development and support of an auxiliary service for analysts within the Unified Federal Register of the Population of Russia (EPH).",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Creating a single-page application (SPA) for analysts with the ability to create complex reports and visualize large volumes of data.",
-                "Technologies: Vue.js, React, TypeScript, Grafana.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Development of a complex user interface with a large number of interactive elements and drag-and-drop functionality.",
-                "Working with large volumes of data, including their efficient processing and visualization.",
-                "Ensuring high performance and responsiveness of the UI when working with large datasets.",
-                "Conducting successful project migration from Vue.js to React.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
-                "Implemented a complex UI with multiple interactive components, significantly improving application usability.",
-                "Ensured stable application performance when processing large volumes of data.",
-                "Implemented graphical data visualization using Grafana, improving analytical capabilities and service usability.",
-                "Successfully migrated the project from Vue.js to React, improving architecture flexibility and accelerating the development process.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Client Application for a Utility Company (Lanit)",
-          description:
-            "Project: Development of a client application for the Italian utility company Lanit, providing electricity, internet, and mobile communication services.",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Creating an application allowing company clients to view current promotions, a list of provided services with prices, and pay for services on issued bills.",
-                "Technologies: Vue.js, Vuetify.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Leading frontend development as a team lead for a team of three frontend developers.",
-                "Organizing and distributing tasks within the team, controlling code quality and deadline compliance.",
-                "Developing and implementing interfaces with UX considerations, ensuring simplicity and ease of use.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
-                "Successfully implemented a client application, providing users with convenient access to service information and the ability to pay bills online.",
-                "Effectively led the team, allowing the project to be completed on time and with high quality.",
-                "Optimized interface and application performance, improving overall user experience.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Corporate Website Optimization",
-          description:
-            "Project: Optimization of the company's corporate website to improve Time to Interact and SEO.",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Reducing Time to Interact on the main and landing pages from over 4 seconds to less than 2 seconds, as well as improving search engine optimization (SEO).",
-                "Technologies: HTML, CSS, JavaScript, WordPress, Critical Path CSS, lazy loading.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Complete refactoring of HTML and CSS to improve structure and reduce page weight.",
-                "Application of Critical Path CSS to accelerate critical content rendering and improve PageSpeed metrics.",
-                "Optimization of content loading for priority elements and refactoring of JavaScript to reduce rendering delays.",
-                "Conducting SEO optimization, including improving header structure, meta tags, image optimization, and implementing data schema.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
-                "Reduced Time to Interact from over 4 seconds to 1.2 seconds.",
-                "Improved website SEO optimization, leading to better ranking in search engines and increased organic traffic.",
-                "Ensured stable and fast website operation even under high loads, improving performance and usability.",
+                "Implemented a secure cryptocurrency transaction flow through Solidity smart contracts and Metamask.",
+                "Participated in the migration of an enterprise application from Vue.js to React, improving architecture flexibility and development speed.",
+                "Reduced the Time to Interact of a corporate website from more than 4 seconds to 1.2 seconds by optimizing the critical rendering path.",
               ],
             },
           ],
@@ -242,36 +192,34 @@ export const resume_english: Resume = {
       period: "November 2017 - March 2019 (1 year 5 months)",
       role: "Frontend Developer",
       description:
-        "Company Description: Soft4Brokers Ltd is a fintech company specializing in developing software solutions for the forex and financial trading industry. Their products serve both individual traders and large financial institutions across the global market.",
+        "Company description: Soft4Brokers Ltd is a fintech company developing products for forex and financial trading.",
       projects: [
         {
-          name: "Information Portal and Personal Account",
+          name: "Information portal and trader account",
           description:
-            "Project: Development and optimization of an information portal and personal account for a forex exchange.",
+            "Project: Development of an information portal, personal account, and interactive widgets for a forex platform.",
           sections: [
             {
               title: "Tasks and Technologies",
               items: [
-                "Goal: Providing traders and investors with up-to-date information, educational materials, and investment tools while enabling account management.",
+                "Goal: Provide traders with access to market information, investment tools, profiles, and trading statistics.",
                 "Technologies: jQuery, Razor, Handlebars, SVG, Vue.js, ASP.NET, SQL Server.",
               ],
             },
             {
               title: "Role and Responsibilities",
               items: [
-                "Working in a frontend development team, implementing interactive components and optimizing performance.",
-                "Developing an interactive SVG-based widget for third-party sites, enabling real-time tracking of quotes and profitability.",
-                "Optimizing portal layout to improve performance and usability.",
-                "Creating a trader profile management service with trade statistics visualization.",
+                "Developed the portal and trader account: interactive components, profiles, trading statistics, and data visualization.",
+                "Created SVG widgets for third-party websites: real-time quotes, profitability, and trading metrics.",
+                "Optimized the portal frontend, improving load speed and interface responsiveness.",
               ],
             },
             {
               title: "Results and Achievements",
               items: [
-                "Implemented interactive SVG widgets, increasing user engagement and website traffic.",
-                "Optimized the information portal layout, improving page load speed and overall performance.",
-                "Developed an information portal for forex trading clients using Razor, jQuery, and ResX.",
-                "Created a trader profile management service with trade statistics visualization using Vue.js and i18n.",
+                "Introduced interactive SVG widgets, expanding external integration capabilities for the forex platform.",
+                "Developed a trader profile management service with trading statistics visualization.",
+                "Improved performance and maintainability of the information portal frontend code.",
               ],
             },
           ],
@@ -281,67 +229,33 @@ export const resume_english: Resume = {
     {
       company: "Freelance",
       period: "April 2015 - November 2017 (2 years 7 months)",
-      role: "Front End Developer",
+      role: "Frontend Developer",
       description:
-        "Project: Development and optimization of an information portal and personal account for a shopping center.",
+        "Description: Web development for small and medium-sized businesses: websites, personal accounts, admin panels, and booking services.",
       projects: [
         {
-          name: "Shopping Center Website",
+          name: "Web applications and admin panels",
           sections: [
             {
               title: "Tasks and Technologies",
               items: [
-                "Goal: Creating a user-friendly web application for shopping center clients and a functional management panel for business owners.",
-                "Technologies: HTML, CSS, jQuery, MODX, SVG.",
+                "Goal: Develop client interfaces, CMS integrations, and administrative tools for local businesses.",
+                "Technologies: HTML, CSS, JavaScript, jQuery, MODX, SVG, PostgreSQL.",
               ],
             },
             {
               title: "Role and Responsibilities",
               items: [
-                "Developed the entire frontend with responsive interfaces for mobile, tablet, and desktop.",
-                "Implemented a client-facing interface with intuitive search and an interactive SVG-based shopping center map.",
-                "Implemented business owner functionality for renting premises and managing promotions.",
+                "Developed websites, personal accounts, and admin panels with responsive layouts and CMS integration.",
+                "Implemented an interactive SVG map of a shopping center with search and object navigation.",
+                "Created a tennis court booking system with a client interface, admin panel, and PostgreSQL.",
               ],
             },
             {
               title: "Results and Achievements",
               items: [
-                "Delivered functionality for both target audiences (clients and business owners).",
-                "Developed an interactive SVG-based map, improving navigation and engagement.",
-                "Created a responsive design, ensuring excellent user experience across devices.",
-                "Implemented a content management system simplifying updates about stores and promotions.",
-              ],
-            },
-          ],
-        },
-        {
-          name: "Tennis Court Booking System",
-          sections: [
-            {
-              title: "Tasks and Technologies",
-              items: [
-                "Goal: Creating a convenient system allowing court owners to manage schedules and clients to book time slots.",
-                "Technologies: HTML, CSS, JavaScript, MODX, PostgreSQL.",
-              ],
-            },
-            {
-              title: "Role and Responsibilities",
-              items: [
-                "Performing full-cycle development as a full-stack developer.",
-                "Creating an intuitive interface for clients with search and filtering for courts by services and prices.",
-                "Developing a control panel for court owners with real-time booking management.",
-                "Integrating PostgreSQL for storing information about courts, bookings, and users.",
-                "Ensuring system security and performance.",
-              ],
-            },
-            {
-              title: "Results and Achievements",
-              items: [
-                "Developed a platform connecting court owners and clients in a single system.",
-                "Implemented flexible search and filtering, enabling clients to quickly find suitable courts.",
-                "Created an effective schedule management system, optimizing the booking process.",
-                "Ensured high system performance capable of handling multiple requests simultaneously.",
-                "Implemented security measures to protect user data.",
+                "Built basic full-stack experience: frontend, CMS, PostgreSQL, admin panels, and user scenarios.",
+                "Implemented functionality for two audiences: service customers and business owners.",
               ],
             },
           ],
