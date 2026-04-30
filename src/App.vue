@@ -1,130 +1,80 @@
 <template>
   <main class="page">
-    <div class="page__toolbar">
-      <button
-        v-for="(lang, key) in resumeMap"
-        :key="key"
-        class="download-button"
-        type="button"
-       
-        v-text="key"
-        @click="changeLanguage(key)"
-      />
-      <button
-        class="download-button"
-        type="button"
-        :disabled="isGenerating"
-        @click="downloadPdf"
-      >
-        <span v-if="!isGenerating">Download PDF</span>
-        <span v-else>Preparing...</span>
-      </button>
+    <div class="toolbar">
+      <div class="toolbar__group">
+        <button
+          v-for="(_, key) in resumeMap"
+          :key="key"
+          type="button"
+          class="lang-button"
+          :class="{ 'lang-button--active': key === lang }"
+          @click="lang = key"
+        >
+          {{ langLabel[key] }}
+        </button>
+      </div>
+      <div class="toolbar__group toolbar__group--right">
+        <span v-if="preview.isBuilding.value" class="spinner" aria-label="Building PDF" />
+        <button
+          v-else
+          type="button"
+          class="download-button"
+          :disabled="!preview.blobUrl.value || preview.error.value !== null"
+          @click="onDownload"
+        >
+          Download
+        </button>
+      </div>
     </div>
-    <section
-      class="resume"
-      :class="{ 'resume--exporting': isGenerating }"
-      ref="resumeRef"
-    >
-      <ResumeHeader :header="resume.header" />
-
-      <UiSection title="SUMMARY">
-        <p class="resume__text">
-          {{ resume.summary }}
-        </p>
-      </UiSection>
-      <div class="break-page" />
-      <UiSection title="SKILLS">
-        <p class="resume__text">
-          {{ resume.skills }}
-        </p>
-      </UiSection>
-
-      <UiSection title="PROFESSIONAL EXPERIENCE">
-        <ExperienceBlock
-          v-for="experience in resume.experiences"
-          :key="experience.company"
-          :experience="experience"
-        />
-      </UiSection>
-
-      <UiSection title="LANGUAGES" variant="languages">
-        <LanguagesList :languages="resume.languages" />
-      </UiSection>
-    </section>
+    <p v-if="preview.error.value" class="error-banner">{{ preview.error.value }}</p>
+    <iframe
+      v-if="preview.blobUrl.value"
+      class="preview"
+      :src="preview.blobUrl.value"
+      title="Resume preview"
+    />
+    <div v-else class="preview preview--placeholder" />
   </main>
 </template>
 
-<script setup>
-import { ref, computed, nextTick } from "vue";
-import html2pdf from "html2pdf.js";
-import ResumeHeader from "./components/ResumeHeader.vue";
-import UiSection from "./components/ui/UiSection.vue";
-import ExperienceBlock from "./components/ExperienceBlock.vue";
-import LanguagesList from "./components/LanguagesList.vue";
-import { resume_spanish, resume_english, resume_russian } from "./data";
+<script setup lang="ts">
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import type { Resume, ResumeLang } from './types/resume'
+import { resume_english, resume_russian, resume_spanish } from './data'
+import { usePdfPreview } from './composables/usePdfPreview'
 
-const resumeRef = ref(null);
-const isGenerating = ref(false);
-
-const lang = ref('english');
-
-const resumeMap = {
+const resumeMap: Record<ResumeLang, Resume> = {
   english: resume_english,
   russian: resume_russian,
   spanish: resume_spanish,
-};
+}
 
-const changeLanguage = (newLang) => {
-  if (resumeMap[newLang]) {
-    lang.value = newLang;
-  }
-};
+const langLabel: Record<ResumeLang, string> = {
+  english: 'English',
+  russian: 'Russian',
+  spanish: 'Spanish',
+}
 
-const resume = computed(() => resumeMap[lang.value]);
+const lang = ref<ResumeLang>('english')
+const resume = computed<Resume>(() => resumeMap[lang.value])
 
-const downloadPdf = async () => {
-  if (!resumeRef.value || isGenerating.value) return;
+const preview = usePdfPreview()
 
-  isGenerating.value = true;
+watch(lang, () => {
+  void preview.rebuild(resume.value)
+})
 
-  try {
-    await nextTick();
+onMounted(() => {
+  void preview.rebuild(resume.value)
+})
 
-    const element = resumeRef.value;
-    
-    const opt = {
-      margin: [15, 0, 15, 0], // equal top/bottom margins
-      filename: `vasili-sholukh-resume-${lang.value}.pdf`,
-      image: { type: 'jpeg', quality: 0.98 },
-      html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-      pagebreak: { mode: ['css', 'legacy'], avoid: '.no-break' }
-    };
+onUnmounted(() => {
+  preview.dispose()
+})
 
-    await html2pdf().set(opt).from(element).toPdf().get('pdf').then((pdf) => {
-      const totalPages = pdf.internal.getNumberOfPages();
-      const pageWidth = pdf.internal.pageSize.getWidth();
-      const pageHeight = pdf.internal.pageSize.getHeight();
-
-      for (let i = 1; i <= totalPages; i++) {
-        pdf.setPage(i);
-        pdf.setFontSize(10);
-        pdf.setTextColor(150);
-        pdf.text(
-          `Page ${i} of ${totalPages}`,
-          pageWidth / 2,
-          pageHeight - 10,
-          { align: "center" }
-        );
-      }
-    }).save();
-
-  } catch (error) {
-    console.error("Failed to generate PDF", error);
-  } finally {
-    isGenerating.value = false;
-  }
-};
+const onDownload = (): void => {
+  preview.download(`vasili-sholukh-resume-${lang.value}.pdf`)
+}
 </script>
 
 <style scoped>
@@ -132,61 +82,97 @@ const downloadPdf = async () => {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 24px;
-  padding: 48px 24px;
+  background: #eef2f7;
 }
 
-.page__toolbar {
+.toolbar {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  background: #ffffff;
+  border-bottom: 1px solid #e2e6ef;
+  box-shadow: 0 4px 12px rgba(16, 27, 50, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.toolbar__group {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-.resume {
-  width: 900px;
-  max-width: 100%;
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 32px 80px rgba(16, 27, 50, 0.12);
-  overflow: hidden;
+.toolbar__group--right {
+  min-width: 152px;
+  justify-content: flex-end;
 }
 
-.resume--exporting {
-  width: 210mm;
-  max-width: none;
-  border-radius: 0;
-  box-shadow: none;
+.lang-button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid #d6dde9;
   background: #ffffff;
+  color: #1f2a3d;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
 }
 
-.resume__text {
+.lang-button:hover:not(:disabled) {
+  border-color: #1f2a3d;
+}
+
+.lang-button--active {
+  background: #1f2a3d;
+  border-color: #1f2a3d;
+  color: #ffffff;
+}
+
+.lang-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid #d6dde9;
+  border-top-color: #1f2a3d;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-banner {
   margin: 0;
-  font-size: 15px;
-  color: #3a4357;
+  padding: 10px 24px;
+  background: #fdecea;
+  color: #8a2a1f;
+  font-size: 13px;
+  border-bottom: 1px solid #f3c1bb;
 }
 
-.resume__text + .resume__text {
-  margin-top: 18px;
+.preview {
+  flex: 1;
+  width: 100%;
+  border: 0;
+  background: #ffffff;
+  min-height: calc(100vh - 80px);
 }
 
-@media print {
-  .page {
-    margin: 0;
-    padding: 0;
-    display: block;
-    width: 100%;
-    min-height: auto;
-    align-items: stretch;
-  }
-
-  .resume {
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0 auto;
-    border-radius: 0;
-    box-shadow: none;
-  }
+.preview--placeholder {
+  background: #f6f8fc;
 }
 </style>
-

@@ -1,13 +1,15 @@
+import type { Resume } from "../types/resume";
+
 const photoUrl = new URL("../assets/images/profile.jpg", import.meta.url).href;
 
-export const resume_spanish = {
+export const resume_spanish: Resume = {
   header: {
     name: "VASILI SHOLUKH",
     title: "Desarrollador Frontend Senior",
     photo: photoUrl,
     contacts: [
-      { type: "phone", label: "+34 620 590507" },
-      { type: "email", label: "grunvald@gmail.com" },
+      { type: "phone", label: "+34 620 590507", href: "tel:+34620590507" },
+      { type: "email", label: "grunvald@gmail.com", href: "mailto:grunvald@gmail.com" },
     ],
   },
   summary:
