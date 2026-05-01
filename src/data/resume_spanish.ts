@@ -13,9 +13,16 @@ export const resume_spanish: Resume = {
     ],
   },
   summary:
-    "Desarrollador Frontend Senior con más de 11 años de experiencia en productos web complejos: healthcare AI, rastreo GPS, fintech y sistemas gubernamentales con alto volumen de datos. Actualmente trabajo en BHG Copilot, una plataforma para médicos dentro del modelo estadounidense Value-Based Care: transcripción de consultas con IA, generación de documentación clínica y workflows HEDIS para Medicare Advantage. Me especializo en aplicaciones Vue/TypeScript de alto rendimiento, arquitectura de monorepos frontend, integración de servicios LLM y bibliotecas UI reutilizables. Cumplo funciones de tech lead: coordino un subequipo de hasta 3 desarrolladores, realizo code review, descompongo requisitos con el negocio y llevo funcionalidades a producción.",
-  skills:
-    "JavaScript, TypeScript, HTML5, CSS3, SQL, Vue.js, React, jQuery, Node.js, Express.js, PostgreSQL, MongoDB, Solidity, Web3.js, Git, Webpack, Docker, CI/CD, Vuetify, Material-UI, Bootstrap, Jest, Grafana, WordPress, MODX, RESTful API, GraphQL, WebSocket, SVG, Diseño responsive, Compatibilidad cross-browser, Optimización de rendimiento, SEO, Agile, Scrum, gulp, vuex, mobx, quasar, leaflet, elements-ui, vite",
+    "Desarrollador Frontend Senior con más de 11 años de experiencia en productos web complejos: healthcare AI, fleet-management, fintech y sistemas enterprise data-heavy. Actualmente trabajo en BHG Copilot, una plataforma para médicos dentro del modelo estadounidense Value-Based Care: transcripción de consultas con IA, generación de documentación clínica y workflows HEDIS para Medicare Advantage. Me especializo en aplicaciones Vue/TypeScript de alto rendimiento, arquitectura de monorepos frontend, integración de servicios LLM y bibliotecas UI reutilizables. Cumplo funciones de tech lead: coordino un subequipo de hasta 3 desarrolladores, realizo code review, descompongo requisitos con el negocio y llevo funcionalidades a producción.",
+  skills: [
+    "Frontend Architecture: TypeScript, Vue 2/3, React, Vite, Webpack, performance tuning.",
+    "Interface Engineering: layouts complejos, UI adaptativa, cross-browser UI, SVG interactions.",
+    "AI Integration: integración LLM, STT pipelines, prompt composition, WebSocket streaming, ONNX Runtime.",
+    "Document Engineering: TipTap, ProseMirror, Markdown, pdfmake, generación PDF/XLS, JSON conversion.",
+    "Backend & APIs: Node.js, Express.js, GraphQL, REST API, PostgreSQL, MongoDB.",
+    "Engineering Platform: pnpm monorepo, Turborepo, Docker, CI/CD, Git, unit testing, code review.",
+    "Domains: healthcare / Value-Based Care, GPS tracking, fintech, sistemas enterprise data-heavy.",
+  ].join("\n"),
   experiences: [
     {
       company: "SXOPE (Better Health Group)",
@@ -38,7 +45,7 @@ export const resume_spanish: Resume = {
               title: "Rol y Responsabilidades",
               items: [
                 "Cumplo funciones de tech lead: coordino un subequipo de hasta 3 desarrolladores, realizo code review, descompongo requisitos con el negocio, distribuyo tareas y presento resultados a stakeholders.",
-                "Lidero la adopción de coding agents en el workflow de ingeniería: preparo documentación agent-ready, skills, subagents y runbooks para el monorepo, y formo al equipo en prácticas efectivas y seguras con agentes de IA.",
+                "Lidero la adopción de coding agents en el workflow de ingeniería: preparo documentación y reglas para un monorepo agent-ready, configuro agentes especializados y formo al equipo en prácticas seguras de desarrollo asistido por IA.",
                 "Lidero el área HEDIS end-to-end: desde la aclaración de requisitos de negocio y búsqueda de fuentes de datos hasta la entrega en producción.",
                 "Optimizo el rendimiento y la arquitectura del monorepo frontend, incluyendo la división estructural en feature chunks y la gestión de dependencias de paquetes internos.",
               ],
@@ -46,9 +53,9 @@ export const resume_spanish: Resume = {
             {
               title: "Resultados y Logros",
               items: [
-                "Reduje el bundle de 18 MB a 13 MB (-28%), mejoré First Contentful Paint de 4 s a 2 s (-50%) y Time to Interaction de 9 s a 6 s (-33%).",
-                "Inicié y completé la migración de 9 paquetes internos a peerDependencies, eliminando conflictos de versiones, instancias duplicadas de Vue y peso innecesario en las aplicaciones consumidoras.",
-                "Lidero el área HEDIS del producto desde los requisitos de negocio hasta producción con un equipo de hasta 3 ingenieros.",
+                "Optimicé la carga de la aplicación: reduje el bundle, mejoré First Contentful Paint y acorté Time to Interaction.",
+                "Mejoré la gestión de dependencias de paquetes internos, eliminando conflictos de versiones, dependencias duplicadas y peso innecesario en el bundle de las aplicaciones consumidoras.",
+                "Creé una base reutilizable para integraciones AI/rich-text: el editor interno, el patrón WS-over-REST y los pipelines documentales se reutilizan en varias funcionalidades de Copilot.",
               ],
             },
           ],
@@ -69,7 +76,7 @@ export const resume_spanish: Resume = {
               title: "Rol y Responsabilidades",
               items: [
                 "Desarrollé Voice Note / AI Scribe: procesamiento del flujo de audio desde una Chrome extension, integración con proveedores AI/STT y generación de sugerencias clínicas basadas en el historial del paciente.",
-                "Realicé technical discovery del pipeline STT: ONNX Runtime Web on-device inference -> Gemini streaming -> solución de producción en ElevenLabs, teniendo en cuenta las restricciones del entorno clínico real.",
+                "Realicé technical discovery del pipeline STT: ONNX Runtime Web on-device inference -> Gemini streaming -> arquitectura de producción en ElevenLabs, teniendo en cuenta las restricciones del entorno clínico real.",
                 "Desarrollé Progress Note Generator: agregación de datos del paciente, prompt composition, obtención de AI JSON estructurado y generación de PDF textual mediante pdfmake.",
               ],
             },
@@ -254,7 +261,7 @@ export const resume_spanish: Resume = {
             {
               title: "Resultados y Logros",
               items: [
-                "Construí experiencia full-stack básica: frontend, CMS, PostgreSQL, paneles administrativos y escenarios de usuario.",
+                "Construí experiencia full-stack: frontend, CMS, PostgreSQL, paneles administrativos y escenarios de usuario.",
                 "Implementé funcionalidad para dos audiencias: clientes de servicios y propietarios de negocios.",
               ],
             },

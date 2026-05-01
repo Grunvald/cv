@@ -13,9 +13,16 @@ export const resume_english: Resume = {
     ],
   },
   summary:
-    "Senior Frontend Developer with 11+ years of experience in complex web products: healthcare AI, GPS tracking, fintech, and government data-heavy systems. Currently working on BHG Copilot, a platform for physicians in the US Value-Based Care model: AI transcription of visits, clinical documentation generation, HEDIS/workflows for Medicare Advantage. I specialize in high-performance Vue/TypeScript applications, frontend monorepo architecture, LLM service integration, and reusable UI libraries. I act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, and deliver features to production.",
-  skills:
-    "JavaScript, TypeScript, HTML5, CSS3, SQL, Vue.js, React, jQuery, Node.js, Express.js, PostgreSQL, MongoDB, Solidity, Web3.js, Git, Webpack, Docker, CI/CD, Vuetify, Material-UI, Bootstrap, Jest, Grafana, WordPress, MODX, RESTful API, GraphQL, WebSocket, SVG, Responsive Design, Cross-browser Compatibility, Performance Optimization, SEO, Agile, Scrum, gulp, vuex, mobx, quasar, leaflet, elements-ui, vite",
+    "Senior Frontend Developer with 11+ years of experience in complex web products: healthcare AI, fleet-management, fintech, and data-heavy enterprise systems. Currently working on BHG Copilot, a platform for physicians in the US Value-Based Care model: AI transcription of visits, clinical documentation generation, HEDIS/workflows for Medicare Advantage. I specialize in high-performance Vue/TypeScript applications, frontend monorepo architecture, LLM service integration, and reusable UI libraries. I act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, and deliver features to production.",
+  skills: [
+    "Frontend Architecture: TypeScript, Vue 2/3, React, Vite, Webpack, performance tuning.",
+    "Interface Engineering: complex layouts, adaptive UI systems, cross-browser UI, SVG interactions.",
+    "AI Integration: LLM integration, STT pipelines, prompt composition, WebSocket streaming, ONNX Runtime.",
+    "Document Engineering: TipTap, ProseMirror, Markdown, pdfmake, PDF/XLS generation, JSON conversion.",
+    "Backend & APIs: Node.js, Express.js, GraphQL, REST API, PostgreSQL, MongoDB.",
+    "Engineering Platform: pnpm monorepo, Turborepo, Docker, CI/CD, Git, unit testing, code review.",
+    "Domains: healthcare / Value-Based Care, GPS tracking, fintech, data-heavy enterprise systems.",
+  ].join("\n"),
   experiences: [
     {
       company: "SXOPE (Better Health Group)",
@@ -38,7 +45,7 @@ export const resume_english: Resume = {
               title: "Role and Responsibilities",
               items: [
                 "Act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, distribute tasks, and present results to stakeholders.",
-                "Lead the adoption of coding agents in the engineering workflow: prepare agent-ready documentation, skills, subagents, and runbooks for the monorepo, and train the team in effective and safe AI-agent practices.",
+                "Lead the adoption of coding agents in the engineering workflow: prepare documentation and rules for an agent-ready monorepo, configure specialized agents, and train the team in safe AI-assisted development practices.",
                 "Own the HEDIS area end-to-end: from clarifying business requirements and finding data sources to production delivery.",
                 "Optimize performance and frontend monorepo architecture, including structural splitting into feature chunks and dependency management for internal packages.",
               ],
@@ -46,9 +53,9 @@ export const resume_english: Resume = {
             {
               title: "Results and Achievements",
               items: [
-                "Reduced bundle size from 18 MB to 13 MB (-28%), improved First Contentful Paint from 4s to 2s (-50%), and Time to Interaction from 9s to 6s (-33%).",
-                "Initiated and completed the migration of 9 internal packages to peerDependencies, eliminating version conflicts, duplicate Vue instances, and extra weight in consuming applications.",
-                "Lead the HEDIS product area from business requirements to production with a team of up to 3 engineers.",
+                "Optimized application loading: reduced bundle size, improved First Contentful Paint, and shortened Time to Interaction.",
+                "Improved dependency management for internal packages, eliminating version conflicts, duplicate dependencies, and unnecessary bundle weight in consuming applications.",
+                "Created a reusable foundation for AI/rich-text integrations: the internal editor, WS-over-REST pattern, and document pipelines are reused across several Copilot features.",
               ],
             },
           ],
@@ -69,7 +76,7 @@ export const resume_english: Resume = {
               title: "Role and Responsibilities",
               items: [
                 "Developed Voice Note / AI Scribe: audio stream processing from a Chrome extension, integration with AI/STT providers, and generation of clinical suggestions based on patient history.",
-                "Conducted technical discovery of the STT pipeline: ONNX Runtime Web on-device inference -> Gemini streaming -> production solution on ElevenLabs, considering real clinical environment constraints.",
+                "Conducted technical discovery of the STT pipeline: ONNX Runtime Web on-device inference -> Gemini streaming -> production architecture on ElevenLabs, considering real clinical environment constraints.",
                 "Developed Progress Note Generator: patient data aggregation, prompt composition, structured AI JSON retrieval, and text-based PDF generation via pdfmake.",
               ],
             },
@@ -255,7 +262,7 @@ export const resume_english: Resume = {
             {
               title: "Results and Achievements",
               items: [
-                "Built basic full-stack experience: frontend, CMS, PostgreSQL, admin panels, and user scenarios.",
+                "Built full-stack experience: frontend, CMS, PostgreSQL, admin panels, and user scenarios.",
                 "Implemented functionality for two audiences: service customers and business owners.",
               ],
             },

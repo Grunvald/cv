@@ -13,9 +13,16 @@ export const resume_russian: Resume = {
     ],
   },
   summary:
-    "Senior Frontend-разработчик с 11+ годами опыта в сложных веб-продуктах: healthcare AI, GPS-трекинг, финтех, государственные data-heavy системы. Сейчас работаю над BHG Copilot — платформой для врачей в американской модели Value-Based Care: AI-транскрипция приёмов, генерация клинической документации, HEDIS/workflow для Medicare Advantage. Специализируюсь на производительных Vue/TypeScript-приложениях, архитектуре frontend-монорепо, интеграции LLM-сервисов и переиспользуемых UI-библиотеках. Выполняю функции tech lead: координирую подкоманду до 3 разработчиков, провожу code review, декомпозирую требования с бизнесом и довожу фичи до production.",
-  skills:
-    "JavaScript, TypeScript, HTML5, CSS3, SQL, Vue.js, React, jQuery, Node.js, Express.js, PostgreSQL, MongoDB, Solidity, Web3.js, Git, Webpack, Docker, CI/CD, Vuetify, Material-UI, Bootstrap, Jest, Grafana, WordPress, MODX, RESTful API, GraphQL, WebSocket, SVG, Адаптивный дизайн, Кроссбраузерная совместимость, Оптимизация производительности, SEO, Agile, Scrum, gulp, vuex, mobx, quasar, leaflet, elements-ui, vite",
+    "Senior Frontend-разработчик с 11+ годами опыта в сложных веб-продуктах: healthcare AI, fleet-management, fintech и data-heavy enterprise systems. Сейчас работаю над BHG Copilot — платформой для врачей в американской модели Value-Based Care: AI-транскрипция приёмов, генерация клинической документации, HEDIS/workflow для Medicare Advantage. Специализируюсь на производительных Vue/TypeScript-приложениях, архитектуре frontend-монорепо, интеграции LLM-сервисов и переиспользуемых UI-библиотеках. Выполняю функции tech lead: координирую подкоманду до 3 разработчиков, провожу code review, декомпозирую требования с бизнесом и довожу фичи до production.",
+  skills: [
+    "Frontend Architecture: TypeScript, Vue 2/3, React, Vite, Webpack, performance tuning.",
+    "Interface Engineering: complex layouts, adaptive UI systems, cross-browser UI, SVG interactions.",
+    "AI Integration: LLM integration, STT pipelines, prompt composition, WebSocket streaming, ONNX Runtime.",
+    "Document Engineering: TipTap, ProseMirror, Markdown, pdfmake, PDF/XLS generation, JSON conversion.",
+    "Backend & APIs: Node.js, Express.js, GraphQL, REST API, PostgreSQL, MongoDB.",
+    "Engineering Platform: pnpm monorepo, Turborepo, Docker, CI/CD, Git, unit testing, code review.",
+    "Domains: healthcare / Value-Based Care, GPS tracking, fintech, data-heavy enterprise systems.",
+  ].join("\n"),
   experiences: [
     {
       company: "SXOPE (Better Health Group)",
@@ -38,7 +45,7 @@ export const resume_russian: Resume = {
               title: "Роль и обязанности",
               items: [
                 "Выполняю функции tech lead: координирую подкоманду до 3 разработчиков, провожу code review, декомпозирую требования с бизнесом, распределяю задачи и презентую результаты стейкхолдерам.",
-                "Веду инициативу по внедрению coding agents в engineering workflow: подготавливаю agent-ready документацию, skills, subagents и runbooks для монорепо, обучаю команду эффективной и безопасной работе с AI-агентами.",
+                "Веду инициативу по внедрению coding agents в engineering workflow: готовлю документацию и правила для agent-ready монорепо, настраиваю специализированных агентов и обучаю команду безопасной работе с AI-инструментами в разработке.",
                 "Веду HEDIS-направление end-to-end: от уточнения бизнес-требований и поиска источников данных до production delivery.",
                 "Оптимизирую производительность и архитектуру frontend-монорепо, включая структурное разбиение на feature-чанки и управление зависимостями внутренних пакетов.",
               ],
@@ -46,9 +53,9 @@ export const resume_russian: Resume = {
             {
               title: "Результаты и достижения",
               items: [
-                "Сократил bundle с 18 MB до 13 MB (−28%), ускорил First Contentful Paint с 4 с до 2 с (−50%) и Time to Interaction с 9 с до 6 с (−33%).",
-                "Инициировал и выполнил миграцию 9 внутренних пакетов на peerDependencies, устранив конфликты версий, дублирующиеся Vue-инстансы и лишний вес в потребляющих приложениях.",
-                "Веду HEDIS-раздел продукта от бизнес-требований до production с командой до 3 инженеров.",
+                "Оптимизировал загрузку приложения: сократил bundle, ускорил First Contentful Paint и Time to Interaction.",
+                "Улучшил управление зависимостями внутренних пакетов, устранив конфликты версий, дублирование зависимостей и избыточный вес bundle в потребляющих приложениях.",
+                "Создал reusable foundation для AI/rich-text интеграций: внутренний редактор, WS-over-REST паттерн и документные пайплайны переиспользуются в нескольких фичах Copilot.",
               ],
             },
           ],
@@ -69,7 +76,7 @@ export const resume_russian: Resume = {
               title: "Роль и обязанности",
               items: [
                 "Разрабатывал Voice Note / AI Scribe: обработка аудиопотока из Chrome extension, интеграция с AI/STT-провайдерами и генерация клинических предложений на основе истории пациента.",
-                "Провёл technical discovery STT-пайплайна: ONNX Runtime Web on-device inference → Gemini streaming → production-решение на ElevenLabs, с учётом ограничений реальной клинической среды.",
+                "Провёл technical discovery STT-пайплайна: ONNX Runtime Web on-device inference → Gemini streaming → production-архитектура на ElevenLabs, с учётом ограничений реальной клинической среды.",
                 "Разрабатывал Progress Note Generator: агрегация данных пациента, prompt composition, получение структурированного AI-JSON и генерация текстового PDF через pdfmake.",
               ],
             },
@@ -254,7 +261,7 @@ export const resume_russian: Resume = {
             {
               title: "Результаты и достижения",
               items: [
-                "Собрал базовый full-stack опыт: frontend, CMS, PostgreSQL, админ-панели и пользовательские сценарии.",
+                "Получил full-stack опыт: frontend, CMS, PostgreSQL, админ-панели и пользовательские сценарии.",
                 "Реализовал функциональность для двух аудиторий: клиентов сервисов и владельцев бизнеса.",
               ],
             },
