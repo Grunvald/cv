@@ -38,6 +38,7 @@ export const resume_english: Resume = {
               title: "Role and Responsibilities",
               items: [
                 "Act as a tech lead: coordinate a subteam of up to 3 developers, conduct code reviews, decompose requirements with the business, distribute tasks, and present results to stakeholders.",
+                "Lead the adoption of coding agents in the engineering workflow: prepare agent-ready documentation, skills, subagents, and runbooks for the monorepo, and train the team in effective and safe AI-agent practices.",
                 "Own the HEDIS area end-to-end: from clarifying business requirements and finding data sources to production delivery.",
                 "Optimize performance and frontend monorepo architecture, including structural splitting into feature chunks and dependency management for internal packages.",
               ],

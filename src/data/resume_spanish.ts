@@ -38,6 +38,7 @@ export const resume_spanish: Resume = {
               title: "Rol y Responsabilidades",
               items: [
                 "Cumplo funciones de tech lead: coordino un subequipo de hasta 3 desarrolladores, realizo code review, descompongo requisitos con el negocio, distribuyo tareas y presento resultados a stakeholders.",
+                "Lidero la adopción de coding agents en el workflow de ingeniería: preparo documentación agent-ready, skills, subagents y runbooks para el monorepo, y formo al equipo en prácticas efectivas y seguras con agentes de IA.",
                 "Lidero el área HEDIS end-to-end: desde la aclaración de requisitos de negocio y búsqueda de fuentes de datos hasta la entrega en producción.",
                 "Optimizo el rendimiento y la arquitectura del monorepo frontend, incluyendo la división estructural en feature chunks y la gestión de dependencias de paquetes internos.",
               ],
