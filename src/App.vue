@@ -73,7 +73,7 @@ onUnmounted(() => {
 })
 
 const onDownload = (): void => {
-  preview.download(`vasili-sholukh-resume-${lang.value}.pdf`)
+  preview.download(`sholukh-cv-${lang.value}.pdf`)
 }
 </script>
 
