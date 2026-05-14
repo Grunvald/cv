@@ -24,7 +24,7 @@ function contactRow(contact: Contact): Content {
   }
 }
 
-export function headerSection(header: ResumeHeader, photoDataUrl: string): Content {
+export function headerSection(header: ResumeHeader, photoDataUrl: string | null): Content {
   const headline: Content = {
     stack: [
       {
@@ -43,20 +43,22 @@ export function headerSection(header: ResumeHeader, photoDataUrl: string): Conte
       },
       ...header.contacts.map(contactRow),
     ],
-    margin: [SIZES.headerColumnGap, 0, 0, 0],
+    margin: photoDataUrl ? [SIZES.headerColumnGap, 0, 0, 0] : [0, 0, 0, 0],
   }
 
-  const innerColumns: Content = {
-    columns: [
-      {
-        image: photoDataUrl,
-        width: SIZES.photoWidth,
-        height: SIZES.photoHeight,
-      },
-      headline,
-    ],
-    columnGap: 0,
-  }
+  const inner: Content = photoDataUrl
+    ? {
+        columns: [
+          {
+            image: photoDataUrl,
+            width: SIZES.photoWidth,
+            height: SIZES.photoHeight,
+          },
+          headline,
+        ],
+        columnGap: 0,
+      }
+    : headline
 
   const table: ContentTable = {
     table: {
@@ -64,7 +66,7 @@ export function headerSection(header: ResumeHeader, photoDataUrl: string): Conte
       body: [
         [
           {
-            stack: [innerColumns],
+            stack: [inner],
             margin: [
               SIZES.headerSidePadding,
               SIZES.headerVerticalPadding,

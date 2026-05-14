@@ -10,10 +10,10 @@ import {
   experienceSection,
 } from './sections/experience'
 import { languagesSection } from './sections/languages'
-import { resumeFooter } from './sections/footer'
+import { createResumeFooter } from './sections/footer'
 
 export interface ResumeDocAssets {
-  photoDataUrl: string
+  photoDataUrl: string | null
 }
 
 export function buildResumeDoc(resume: Resume, assets: ResumeDocAssets): TDocumentDefinitions {
@@ -40,7 +40,7 @@ export function buildResumeDoc(resume: Resume, assets: ResumeDocAssets): TDocume
       headerSection(resume.header, assets.photoDataUrl),
       body,
     ],
-    footer: resumeFooter,
+    footer: createResumeFooter(resume.header.name),
     pageBreakBefore: (currentNode, nodeQueries) => {
       const level = currentNode.headlineLevel
       if (level !== COMPANY_HEADER_HEADLINE_LEVEL && level !== PROJECT_HEADER_HEADLINE_LEVEL) {

@@ -1,8 +1,8 @@
-import type { Resume } from "../types/resume";
+import type { Resume } from "../../types/resume";
 
-const photoUrl = new URL("../assets/images/profile.jpg", import.meta.url).href;
+const photoUrl = new URL("../../assets/images/profile.jpg", import.meta.url).href;
 
-export const resume_english: Resume = {
+export const resume: Resume = {
   header: {
     name: "VASILI SHOLUKH",
     title: "Senior Frontend Developer",

@@ -3,7 +3,18 @@
     <div class="toolbar">
       <div class="toolbar__group">
         <button
-          v-for="(_, key) in resumeMap"
+          v-for="(_, key) in resumes"
+          :key="key"
+          type="button"
+          class="lang-button"
+          :class="{ 'lang-button--active': key === person }"
+          @click="person = key"
+        >
+          {{ personLabel[key] }}
+        </button>
+        <span class="toolbar__separator" aria-hidden="true" />
+        <button
+          v-for="(_, key) in resumes[person]"
           :key="key"
           type="button"
           class="lang-button"
@@ -39,15 +50,9 @@
 
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
-import type { Resume, ResumeLang } from './types/resume'
-import { resume_english, resume_russian, resume_spanish } from './data'
+import type { PersonId, Resume, ResumeLang } from './types/resume'
+import { personLabel, personSlug, resumes } from './data'
 import { usePdfPreview } from './composables/usePdfPreview'
-
-const resumeMap: Record<ResumeLang, Resume> = {
-  english: resume_english,
-  russian: resume_russian,
-  spanish: resume_spanish,
-}
 
 const langLabel: Record<ResumeLang, string> = {
   english: 'English',
@@ -55,13 +60,14 @@ const langLabel: Record<ResumeLang, string> = {
   spanish: 'Spanish',
 }
 
+const person = ref<PersonId>('vasili')
 const lang = ref<ResumeLang>('english')
-const resume = computed<Resume>(() => resumeMap[lang.value])
+const resume = computed<Resume>(() => resumes[person.value][lang.value])
 
 const preview = usePdfPreview()
 
-watch(lang, () => {
-  void preview.rebuild(resume.value)
+watch(resume, (next) => {
+  void preview.rebuild(next)
 })
 
 onMounted(() => {
@@ -73,7 +79,7 @@ onUnmounted(() => {
 })
 
 const onDownload = (): void => {
-  preview.download(`sholukh-cv-${lang.value}.pdf`)
+  preview.download(`${personSlug[person.value]}-cv-${lang.value}.pdf`)
 }
 </script>
 
@@ -108,6 +114,12 @@ const onDownload = (): void => {
 .toolbar__group--right {
   min-width: 152px;
   justify-content: flex-end;
+}
+
+.toolbar__separator {
+  width: 1px;
+  height: 20px;
+  background: #d6dde9;
 }
 
 .lang-button {

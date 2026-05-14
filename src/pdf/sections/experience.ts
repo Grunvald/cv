@@ -6,41 +6,45 @@ import { sectionTitle } from './sectionTitle'
 export const COMPANY_HEADER_HEADLINE_LEVEL = 10
 export const PROJECT_HEADER_HEADLINE_LEVEL = 11
 
-function companyHeader(experience: Experience): Content {
-  const stack: Content[] = [
-    {
-      columns: [
-        {
-          stack: [
-            {
-              text: experience.company.toUpperCase(),
-              fontSize: 14,
-              bold: true,
-              color: COLORS.nameDark,
-              characterSpacing: LETTER_SPACING.company,
-            },
-            {
-              text: experience.period,
-              fontSize: SIZES.smallFontSize,
-              color: COLORS.mutedText,
-              margin: [0, 4, 0, 0],
-            },
-          ],
-          width: '*',
-        },
-        {
-          text: experience.role,
-          fontSize: SIZES.bodyFontSize,
-          bold: true,
-          color: COLORS.nameDark,
-          alignment: 'right',
-          width: 'auto',
-          margin: [12, 2, 0, 0],
-        },
-      ],
-      columnGap: 12,
-    },
-  ]
+function companyHeader(experience: Experience, prefix?: Content): Content {
+  const stack: Content[] = []
+
+  if (prefix) {
+    stack.push(prefix)
+  }
+
+  stack.push({
+    columns: [
+      {
+        stack: [
+          {
+            text: experience.company.toUpperCase(),
+            fontSize: 14,
+            bold: true,
+            color: COLORS.nameDark,
+            characterSpacing: LETTER_SPACING.company,
+          },
+          {
+            text: experience.period,
+            fontSize: SIZES.smallFontSize,
+            color: COLORS.mutedText,
+            margin: [0, 4, 0, 0],
+          },
+        ],
+        width: '*',
+      },
+      {
+        text: experience.role,
+        fontSize: SIZES.bodyFontSize,
+        bold: true,
+        color: COLORS.nameDark,
+        alignment: 'right',
+        width: 'auto',
+        margin: [12, 2, 0, 0],
+      },
+    ],
+    columnGap: 12,
+  })
 
   if (experience.description) {
     stack.push({
@@ -125,10 +129,10 @@ function projectBlock(project: Project): Content {
   }
 }
 
-function experienceBlock(experience: Experience): Content {
+function experienceBlock(experience: Experience, prefix?: Content): Content {
   return {
     stack: [
-      companyHeader(experience),
+      companyHeader(experience, prefix),
       ...experience.projects.map(projectBlock),
     ],
     margin: [0, 0, 0, 16],
@@ -137,10 +141,10 @@ function experienceBlock(experience: Experience): Content {
 
 export function experienceSection(resume: Resume): Content {
   return {
-    stack: [
-      sectionTitle('Professional Experience'),
-      ...resume.experiences.map(experienceBlock),
-    ],
+    stack: resume.experiences.map((experience, idx) => experienceBlock(
+      experience,
+      idx === 0 ? sectionTitle('Professional Experience') : undefined,
+    )),
     margin: [0, 0, 0, SIZES.blockSpacing],
   }
 }

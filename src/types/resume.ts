@@ -33,7 +33,7 @@ export interface Language {
 export interface ResumeHeader {
   name: string
   title: string
-  photo: string
+  photo?: string
   contacts: Contact[]
 }
 
@@ -46,3 +46,5 @@ export interface Resume {
 }
 
 export type ResumeLang = 'english' | 'russian' | 'spanish'
+
+export type PersonId = 'vasili' | 'maksim'

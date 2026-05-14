@@ -62,7 +62,7 @@ export function usePdfPreview(): UsePdfPreview {
     try {
       const [pdfmake, photoDataUrl] = await Promise.all([
         ensurePdfmake(),
-        loadPhotoDataUrl(resume.header.photo),
+        resume.header.photo ? loadPhotoDataUrl(resume.header.photo) : Promise.resolve(null),
       ])
       if (token !== buildToken) return
 
